@@ -13,21 +13,21 @@ class QuizBrain:
         self.question_number += 1
         current_question = random.choice(self.questions_list)
         current_text = current_question.text
+        current_answer = current_question.answer
         self.questions_list.remove(current_question)
 
         player_input = input(f"Q.{self.question_number}: {current_text} (True/False)?: ")
 
-        return current_question, player_input
+        self.check_answer(current_answer, player_input)
 
-    def check_answer(self):
-        current_question, player_input = self.next_question()
-        if current_question.answer.lower() == player_input.lower():
+    def check_answer(self, answer, input):
+        if answer.lower() == input.lower():
             self.score += 1
             print("You got it right!")
-
         else:
             print("That's wrong.")
 
-        print(f"The correct answer was: {current_question.answer}")
+        print(f"The correct answer was: {answer}")
         print(f"Your current score is {self.score}/{self.question_number}")
+        print("\n")
 
